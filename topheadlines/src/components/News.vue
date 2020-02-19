@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       newsData: [],
-      API_KEY: 'cb2ecc4d780c4eceabc7795d21eaf11b'
+      API_KEY: ???
     };
   },
   methods: {

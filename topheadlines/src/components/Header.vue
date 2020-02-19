@@ -2,7 +2,7 @@
 <div>
     <ul>
         <li v-for="(option, index) in options" :key="index">
-            <button v-on:click="getNewsOption(option)">{{option}}</button>
+            <button v-on:click="getNewsOption(option)">{{option.toUpperCase()}}</button>
         </li>
     </ul>
     <News :optionID="newsOption" />
@@ -16,7 +16,7 @@ export default {
     },
     data() {
         return {
-            newsOption: 'test',
+            newsOption: 'General',
             options: ['entertainment', 'general', 'health', 'science', 'sports', 'technology'],
         };
     },

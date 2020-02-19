@@ -1,20 +1,18 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-     <LandingPage />
+    <div id="nav">
+      <Header />
+    </div>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import LandingPage from '@/components/LandingPage.vue';
-
-@Component({
+<script>
+import Header from "@/components/Header.vue"
+export default {
   components: {
-    LandingPage,
-  },
-})
-export default class App extends Vue {}
+    Header
+  }
+}
 </script>
 
 <style lang="scss">
@@ -24,6 +22,18 @@ export default class App extends Vue {}
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 </style>

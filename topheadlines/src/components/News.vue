@@ -1,23 +1,29 @@
 <template>
-  <div>
-    <h1>{{ optionID.toUpperCase() }}</h1>
-    <div class="row" v-for="(article, index) in newsData" :key="index">
+<div>
+      <h1>{{ optionID.toUpperCase() }}</h1>
+  <div class="news-reel">
+    <div class="row news-card" v-for="(article, index) in newsData" :key="index">
       <div class="col s12 m7">
       <div class="card">
         <div class="card-image">
           <img :src="article.urlToImage" />
-          <h4>{{article.title}}</h4>
         </div>
         <div class="card-content">
-             <p>{{article.content}}</p>
+          <h4>{{article.title}}</h4>
+          <ul>
+            <li>{{article.source.name}}</li>
+            <li>{{article.author}}</li>
+          </ul>
+             <p v-if="article.content">{{article.content}}</p>
         </div>
         <div class="card-action">
-          <a :href="article.url">Click to full article</a>
+          <a :href="article.url" target="_blank">Click to full article</a>
         </div>     
       </div>
       </div> 
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -59,4 +65,32 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+h1{
+  text-align: center;
+}
+.news-reel{
+  display: flex;
+  flex-flow: row wrap;
+  .card{
+    width: 350px;
+    height: auto;
+    margin: 20px;
+    .card-content{
+      h4{
+        font-size: 1rem;
+        font-weight: bold;
+      }
+      ul{
+        text-align: left;
+        li{
+          color: #5b5b5b;
+        }
+      }
+      p{
+        font-size: 14px;
+      }
+    }
+  }
+}
+</style>

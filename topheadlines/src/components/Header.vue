@@ -1,10 +1,17 @@
 <template>
 <div>
-    <ul>
+<div class="navbar-fixed ">
+    <nav>
+    <div class="nav-wrapper purple darken-3">
+        <a href="#" class="brand-logo right">Logo</a>
+    <ul class="left hide-on-med-and-down">
         <li v-for="(option, index) in options" :key="index">
-            <button v-on:click="getNewsOption(option)">{{option.toUpperCase()}}</button>
+            <a href="#" v-on:click="getNewsOption(option)">{{option.toUpperCase()}}</a>
         </li>
     </ul>
+    </div>
+    </nav>
+</div>
     <News :optionID="newsOption" />
 </div>
 </template>
@@ -17,7 +24,7 @@ export default {
     data() {
         return {
             newsOption: 'General',
-            options: ['entertainment', 'general', 'health', 'science', 'sports', 'technology'],
+            options: ['general', 'entertainment',  'health', 'science', 'sports', 'technology'],
         };
     },
     methods: {
@@ -30,6 +37,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
-
+.navbar-fixed{ 
+    margin-bottom: 50px;
+}
 </style>

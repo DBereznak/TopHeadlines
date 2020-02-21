@@ -18,7 +18,7 @@
              <p v-if="article.content">{{article.content}}</p>
         </div>
         <div class="card-action">
-          <a :href="article.url" target="_blank">Click to full article</a>
+          <a class="purple-text text-darken-3" :href="article.url" target="_blank">Click to full article</a>
         </div>     
       </div>
       </div> 
@@ -47,12 +47,11 @@ export default {
     getNews(option) {
       axios
         .get(
-          `https://newsapi.org/v2/top-headlines?${option}&apiKey=${this.API_KEY}`
+          `https://newsapi.org/v2/top-headlines?${option}&sortBy=popularity&pageSize=50&apiKey=${this.API_KEY}`
         )
         .then(response => {
           if(response.data.articles.length > 0){
           this.newsData = response.data.articles;
-          console.log(response.data.articles);
             this.noArticles = false;
           } else{
             this.noArticles = true;
@@ -65,7 +64,6 @@ export default {
     },
     stripQuery(id){
       let title = (id === undefined) ? 'GENERAL' : id.split('=');
-      console.log(title)
       return title[2];
     }
   },
@@ -105,6 +103,14 @@ h1, h2{
       }
       p{
         font-size: 14px;
+      }
+    }
+    .card-action{
+      a{
+        color: #6a1b9a;
+        &:hover{
+          text-decoration: underline;
+        }
       }
     }
   }

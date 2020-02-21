@@ -57,6 +57,9 @@ export default {
 <style scoped lang="scss">
 .navbar-fixed{ 
     margin-bottom: 50px;
+    ul{
+        padding-left: 50px;
+    }
     form{
         position:absolute;
     .input-field{

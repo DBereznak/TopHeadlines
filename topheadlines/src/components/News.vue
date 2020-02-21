@@ -1,6 +1,7 @@
 <template>
 <div>
-      <h1>{{ stripQuery(optionID.toUpperCase()) }}</h1>
+      <h1>{{ stripQuery(optionID.toUpperCase()) || 'GENERAL' }}</h1>
+      <h2 v-if="noArticles">Your Query returned no articles</h2>
   <div class="news-reel">
     <div class="row news-card" v-for="(article, index) in newsData" :key="index">
       <div class="col s12 m7">
@@ -31,9 +32,13 @@ import axios from "axios";
 import config from "../config/config"
 
 export default {
-  props: ["optionID"],
+  props: {  
+  optionID: {
+    type: String
+  }},
   data() {
     return {
+      noArticles: false,
       newsData: [],
       API_KEY: config.API_KEY
     };
@@ -45,8 +50,14 @@ export default {
           `https://newsapi.org/v2/top-headlines?${option}&apiKey=${this.API_KEY}`
         )
         .then(response => {
+          if(response.data.articles.length > 0){
           this.newsData = response.data.articles;
           console.log(response.data.articles);
+            this.noArticles = false;
+          } else{
+            this.noArticles = true;
+            this.newsData = [];
+          }
         })
         .catch(error => {
           console.error(error);
@@ -71,7 +82,7 @@ export default {
 </script>
 
 <style lang="scss">
-h1{
+h1, h2{
   text-align: center;
 }
 .news-reel{

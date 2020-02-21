@@ -62,6 +62,10 @@ export default {
     .input-field{
         width: 300px;
     }
+    input[type=search]{
+        color: #6a1b9a;
+        font-size: 24px;
+    }
     button{
         display: none;
         opacity: 0;

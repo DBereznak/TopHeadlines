@@ -1,6 +1,6 @@
 <template>
 <div>
-      <h1>{{ optionID.toUpperCase() }}</h1>
+      <h1>{{ stripQuery(optionID.toUpperCase()) }}</h1>
   <div class="news-reel">
     <div class="row news-card" v-for="(article, index) in newsData" :key="index">
       <div class="col s12 m7">
@@ -42,7 +42,7 @@ export default {
     getNews(option) {
       axios
         .get(
-          `https://newsapi.org/v2/top-headlines?country=us&category=${option}&apiKey=${this.API_KEY}`
+          `https://newsapi.org/v2/top-headlines?${option}&apiKey=${this.API_KEY}`
         )
         .then(response => {
           this.newsData = response.data.articles;
@@ -51,6 +51,11 @@ export default {
         .catch(error => {
           console.error(error);
         });
+    },
+    stripQuery(id){
+      let title = (id === undefined) ? 'GENERAL' : id.split('=');
+      console.log(title)
+      return title[2];
     }
   },
   watch:{
@@ -60,7 +65,7 @@ export default {
   },
 
   created() {
-    this.getNews('general');
+    this.getNews('country=us&category=general');
   }
 };
 </script>

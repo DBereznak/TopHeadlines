@@ -3,11 +3,24 @@
 <div class="navbar-fixed ">
     <nav>
     <div class="nav-wrapper purple darken-3">
+
         <a href="#" class="brand-logo right">Logo</a>
     <ul class="left hide-on-med-and-down">
         <li v-for="(option, index) in options" :key="index">
             <a href="#" v-on:click="getNewsOption(option)">{{option.toUpperCase()}}</a>
         </li>
+    <li class="search">
+    <form>
+        <div class="input-field">
+          <input id="search" type="search" v-model="customSearch" required>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+          
+        </div>
+        <button v-on:click="getCustomSearch(customSearch)">search</button>
+      </form>
+        </li>
+
     </ul>
     </div>
     </nav>
@@ -23,14 +36,19 @@ export default {
     },
     data() {
         return {
-            newsOption: 'General',
+            customSearch: '',
+            newsOption: 'general',
             options: ['general', 'entertainment',  'health', 'science', 'sports', 'technology'],
         };
     },
     methods: {
         getNewsOption(option) {
-            console.log(option);
-            this.newsOption = option;
+
+            this.newsOption = 'country=us&category=' + option;
+        },
+        
+        getCustomSearch(customSearch){
+            this.newsOption = 'q='+ customSearch;
         }
     }
 }
@@ -39,5 +57,18 @@ export default {
 <style scoped lang="scss">
 .navbar-fixed{ 
     margin-bottom: 50px;
+    form{
+        position:absolute;
+    .input-field{
+        width: 300px;
+    }
+    button{
+        display: none;
+        opacity: 0;
+        position: absolute;
+        top: -200px;
+    }
+    }
+
 }
 </style>

@@ -4,11 +4,15 @@
     <nav>
     <div class="nav-wrapper purple darken-3">
 
-        <a href="#" class="brand-logo right">Logo</a>
+        <span class="right time">{{ updateTime | moment("dddd, MMMM Do YYYY") }}</span>
     <ul class="left hide-on-med-and-down">
         <li v-for="(option, index) in options" :key="index">
-            <a href="#" v-on:click="getNewsOption(option)">{{option.toUpperCase()}}</a>
+            <a v-on:click="getNewsOption(option)">{{option.toUpperCase()}}</a>
         </li>
+        <li>
+            <a v-on:click="getWeather()">WEATHER</a>
+        </li>
+        <li>
     <li class="search">
     <form>
         <div class="input-field">
@@ -25,30 +29,48 @@
     </div>
     </nav>
 </div>
+    <div v-if="!showWeather">
     <News :optionID="newsOption" />
+    </div>
+    <Weather v-else />
 </div>
 </template>
 <script>
-import News from './News.vue'
+import News from './News.vue';
+import Weather from './Weather'
+
 export default {
     components: {
-        News
+        News,
+        Weather
     },
     data() {
         return {
             customSearch: '',
+            showWeather: false,
             newsOption: 'general',
             options: ['general', 'entertainment',  'health', 'science', 'sports', 'technology'],
+             currentDate: Date(),
         };
+       
     },
     methods: {
         getNewsOption(option) {
-
+            this.showWeather = false;
             this.newsOption = 'country=us&category=' + option;
         },
         
         getCustomSearch(customSearch){
+            this.showWeather = false;
             this.newsOption = 'q='+ customSearch;
+        },
+        getWeather(){
+            this.showWeather = true;
+        }
+
+    }, computed: {
+        updateTime: function() {
+            return Date.now();
         }
     }
 }
@@ -76,6 +98,10 @@ export default {
         top: -200px;
     }
     }
-
+    .time{
+        font-size: 16px;
+        font-weight: 600;
+        padding-right: 50px;
+    }
 }
 </style>

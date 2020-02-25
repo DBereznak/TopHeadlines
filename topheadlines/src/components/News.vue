@@ -90,6 +90,11 @@ h1, h2{
     width: 350px;
     height: auto;
     margin: 20px;
+    .card-image{
+      img{
+        max-height: 350px;
+      }
+    }
     .card-content{
       h4{
         font-size: 1rem;
